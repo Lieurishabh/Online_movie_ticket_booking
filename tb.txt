@@ -1,0 +1,176 @@
+CREATE TABLE `tickets_tab` (
+  `tid_ct` varchar(10) NOT NULL,
+  `tname_ct` varchar(100) DEFAULT NULL,
+  `screen_ct` varchar(100) NOT NULL,
+  `movie_ct` varchar(100) NOT NULL,
+  `show_ct` varchar(100) NOT NULL,
+  `time_ct` varchar(100) DEFAULT NULL,
+  `date_ct` varchar(100) DEFAULT NULL,
+  `cat_ct` varchar(100) DEFAULT NULL,
+  `cost_ct` varchar(100) DEFAULT NULL,
+  `tcost_ct` varchar(100) DEFAULT NULL,
+  `tickets_ct` int(4) DEFAULT NULL,
+  `name_ct` varchar(100) DEFAULT NULL,
+  `email_ct` varchar(100) DEFAULT NULL,
+  `ticketid_ct` varchar(100) DEFAULT NULL
+)
+
+
+
+CREATE TABLE `avail_tab` (
+  `tid_ct` varchar(10) DEFAULT NULL,
+  `tname_ct` varchar(100) DEFAULT NULL,
+  `screen_ct` varchar(100) DEFAULT NULL,
+  `cat_ct` varchar(100) DEFAULT NULL,
+  `cost_ct` double DEFAULT NULL,
+  `tot_seats_ct` int(11) DEFAULT NULL,
+  `avail_seats_ct` int(11) DEFAULT NULL
+)
+
+
+ADMIN TABLE
+
+USER TABLE
+
+MOVIE TABLE
+
+CREATE TABLE `shows_tab` (
+  `tid_ct` varchar(10) DEFAULT NULL,
+  `tname_ct` varchar(100) DEFAULT NULL,
+  `screen_ct` varchar(100) DEFAULT NULL,
+  `time_ct` varchar(100) DEFAULT NULL,
+  `show_ct` varchar(100) DEFAULT NULL
+)
+
+
+CREATE TABLE `subscribe_tab` (
+  `name_ct` varchar(100) DEFAULT NULL,
+  `email_ct` varchar(500) NOT NULL,
+  PRIMARY KEY (`email_ct`)
+)
+
+
+
+orcl
+orclpdb
+12345
+
+
+select * from user_info;
+desc user_info;
+desc movie;
+create table movie(movie_id int primary key NOT NULL,mname varchar(50),mcertify varchar(30),mlang varchar(20),mtype varchar(30),mdur varchar(30),mdir varchar(30),mcast varchar(50),rdate varchar(30),mposter varchar(50));
+drop table movie;
+CREATE OR REPLACE TRIGGER movie_info BEFORE INSERT  ON movie FOR EACH ROW BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseq.NEXTVAL))),10,'0') INTO:NEW.movie_id FROM DUAL; END;
+CREATE SEQUENCE SYSTEM.myseq 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+INSERT INTO movie(mname,mcertify,mlang,mtype,mdur,mdi,mcast,rdate,mposter) values("bihari","a","b","b","b","b","b","b","b");
+
+E:\workbench\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\Cineclub-App\movie
+
+
+
+
+
+select * from movie;
+create table show(show_id int primary key NOT NULL,smname varchar(50),stime varchar(30),etime varchar(30),sdate varchar(30));
+CREATE OR REPLACE TRIGGER show_info BEFORE INSERT  ON show FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseq.NEXTVAL))),10,'0') INTO:NEW.show_id FROM DUAL; END;
+insert into show(smname,stime,etime,sdate) values('bahubali','12pm','3pm','12-07-2029');
+select * from show;
+INSERT INTO movie(mname,mcertify,mlang,mtype,mdur,mdir,mcast,rdate,mposter) VALUES('bihari', 'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b');
+select * from movie;
+
+
+create table user_info1(pass_id int primary key not null,name varchar(50),gender varchar(30),email varchar(50),phone varchar(50),position varchar(50),pass varchar(50),cpass varchar(50));
+
+
+
+CREATE SEQUENCE SYSTEM.mysequser 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+CREATE OR REPLACE TRIGGER user_info BEFORE INSERT  ON user_info1 FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(mysequser.NEXTVAL))),10,'0') INTO:NEW.pass_id FROM DUAL; END;
+
+create table user_info1(pass_id int primary key not null,name varchar(50),gender varchar(30),email varchar(50),phone varchar(50),position varchar(50),pass varchar(50),cpass varchar(50),w_limit int Default 6);
+
+
+
+
+
+create table show(show_id int primary key Not Null,movie_id int,smname varchar(50),stime varchar(30),etime varchar(30),sdate varchar(30));
+CREATE SEQUENCE SYSTEM.myseqshow 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+CREATE OR REPLACE TRIGGER show_info BEFORE INSERT  ON show FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseqshow.NEXTVAL))),10,'0') INTO:NEW.show_id FROM DUAL; END;
+
+
+
+
+create table seat_map(seat_id varchar(10),s_type varchar(10),s_price int,s_status varchar(10) default null);
+insert into seat_map(seat_id,s_type,s_price,s_status) values('1','Delux','200','');
+select * from seat_map;
+insert into seat_map(seat_id,s_type,s_price,s_status) values('101','Gold','120','');
+insert into seat_map(seat_id,s_type,s_price,s_status) values('251','Siler Plus','80','');
+insert into seat_map(seat_id,s_type,s_price,s_status) values('451','Silver','60','');
+delete from seat_map where seat_id='451';
+
+
+
+
+create table seat_map(seat_id int primary key not null,seat_type varchar(20),s_price int,s_status varchar(10) default NULL);
+
+CREATE SEQUENCE SYSTEM.myseqseat 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+CREATE OR REPLACE TRIGGER seat_info BEFORE INSERT  ON seat_map FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseqseat.NEXTVAL))),10,'0') INTO:NEW.seat_id FROM DUAL; END;
+
+
+
+create table ticket(tkt_id int primary key not null,pass_id int,show_id int,seat_id int,position varchar(20),name varchar(30),email varchar(50),phone varchar(20),smname varchar(30),sdate varchar(20),stime varchar(30),w_limit varchar(10),payment varchar(20),seat_type varchar(20),s_price int);
+
+CREATE SEQUENCE SYSTEM.myseqticket 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+CREATE OR REPLACE TRIGGER ticket_info BEFORE INSERT  ON ticket FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseqticket.NEXTVAL))),10,'0') INTO:NEW.tkt_id FROM DUAL; END;
+
+
+
+create table seat_map(seat_id int primary key not null,seat_type varchar(20),s_price int,s_status varchar(10) default NULL,show_id int);
+select * from seat_map;
+select * from cart;
+select * from user_info1;
+
+CREATE SEQUENCE SYSTEM.myseqseat 
+START WITH 1 
+MAXVALUE 9999999999999999999999999999 
+MINVALUE 1 
+NOCYCLE CACHE 20 
+NOORDER;
+
+CREATE OR REPLACE TRIGGER seat_info BEFORE INSERT  ON seat_map FOR EACH ROW 
+BEGIN SELECT LPAD(LTRIM(RTRIM(TO_CHAR(myseqseat.NEXTVAL))),10,'0') INTO:NEW.seat_id FROM DUAL; END;

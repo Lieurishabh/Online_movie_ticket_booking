@@ -1,0 +1,9 @@
+.navbar .nav-item:hover .nav-link{
+	background-color: black;
+	color: white;
+	border-radius: 15px;
+}
+.nav-link{
+	border-radius: 15px;
+}
+
